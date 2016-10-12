@@ -1,0 +1,32 @@
+<?php
+
+namespace AppBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+/**
+ * @MongoDB\Document
+ */
+class Rosh105 
+{
+    
+    /**
+     * @MongoDB\Id
+     */
+    protected $id;
+    
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $UEIgamer;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $lastTestPassed;
+    
+    /**
+     * @MongoDB\Field(type="int")
+     */
+    protected $lockedAt;
+}
