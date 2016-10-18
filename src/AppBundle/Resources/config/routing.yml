@@ -1,0 +1,4 @@
+app:
+    resource: "@AppBundle/Controller/RoshController.php"
+    prefix: /rosh
+    type:     rest

@@ -4,16 +4,20 @@ namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use FOS\RestBundle\Controller\Annotations\View;
 
 
 class RoshController extends FOSRestController
 {
     
+    /**
+     * @View()
+     */
     public function getUsersAction()
     {
-        $view = $this->view($data, 200);
+        $data = ['test'=> 'ok'];
 
-        return $this->handleView($view);
+        return $data;
     }
 
     public function redirectAction()
