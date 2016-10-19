@@ -8,7 +8,7 @@ use AppBundle\Document\Model\TicketDistribution as TicketDistributionModel;
 
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="AppBundle\Repository\TicketDistributionRepository")
  *
  */
 class TicketDistribution extends TicketDistributionModel

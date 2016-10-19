@@ -55,12 +55,7 @@ class TicketsManager
      */
     public function getTicketForNewUser()
     {
-        return $this->getTicketRepository()->findOneBy([
-            
-        ]
-        ,[
-            'distributed' => 'ASC'
-        ]);
+        return $this->getTicketRepository()->findMinDistributed()->getSingleResult();
     }
     
     /**
