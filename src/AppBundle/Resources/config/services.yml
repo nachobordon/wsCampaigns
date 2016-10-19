@@ -1,2 +1,8 @@
 services:
-    #
+    up105.manager:
+        class: AppBundle\Services\rosh\Up105Manager
+        arguments: ['@doctrine.odm.mongodb.document_manager', '@tickets.manager']
+    tickets.manager:
+        class: AppBundle\Services\rosh\TicketsManager
+        arguments: ['@doctrine.odm.mongodb.document_manager']
+    

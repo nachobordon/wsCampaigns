@@ -3,11 +3,18 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use AppBundle\Document\Model\Rosh105 as Rosh105Model;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\HasLifecycleCallbacks;
 
 /**
  * @MongoDB\Document
+ * @MongoDBUnique(fields="ueigamer")
+ * @ORM\HasLifecycleCallbacks()
  */
-class Rosh105 
+class Rosh105 extends Rosh105Model
 {
     
     /**
@@ -17,18 +24,37 @@ class Rosh105
     
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
      */
-    protected $UEIgamer;
+    protected $ueigamer;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\Field(type="hash")
      */
-    protected $lastTestPassed;
+    protected $testsPassed;
     
     /**
      * @MongoDB\Field(type="int")
      */
-    protected $lockedAt;
+    protected $unlockAt;
+        
+    /**
+     *
+     * @MongoDB\Field(type="string")
+     */
+    protected $ticket;
+    
+    /**
+     *
+     * @MongoDB\Field(type="string")
+     */
+    protected $allTestsPassedAt;
+    
+    /**
+     *
+     * @MongoDB\Field(type="string")
+     */
+    protected $createdAt;
 
     /**
      * Get id
@@ -41,68 +67,144 @@ class Rosh105
     }
 
     /**
-     * Set uEIgamer
+     * Set ueigamer
      *
-     * @param string $uEIgamer
+     * @param string $ueigamer
      * @return $this
      */
-    public function setUEIgamer($uEIgamer)
+    public function setUeigamer($ueigamer)
     {
-        $this->UEIgamer = $uEIgamer;
+        $this->ueigamer = $ueigamer;
         return $this;
     }
 
     /**
-     * Get uEIgamer
+     * Get ueigamer
      *
-     * @return string $uEIgamer
+     * @return string $ueigamer
      */
-    public function getUEIgamer()
+    public function getUeigamer()
     {
-        return $this->UEIgamer;
+        return $this->ueigamer;
     }
 
     /**
-     * Set lastTestPassed
+     * Set CreatedAt
      *
-     * @param string $lastTestPassed
-     * @return $this
+     * @return self
      */
-    public function setLastTestPassed($lastTestPassed)
+    public function setCreatedAt()
     {
-        $this->lastTestPassed = $lastTestPassed;
+        $now = new \DateTime();
+        $this->createdAt = $now->format('Y-m-d H:i:s');
+
         return $this;
     }
 
     /**
-     * Get lastTestPassed
+     * Get CreatedAt
      *
-     * @return string $lastTestPassed
+     * @return string $CreatedAt
      */
-    public function getLastTestPassed()
+    public function getCreatedAt()
     {
-        return $this->lastTestPassed;
+        return $this->createdAt;
     }
 
     /**
-     * Set lockedAt
+     * Set testsPassed
      *
-     * @param int $lockedAt
+     * @param hash $testsPassed
      * @return $this
      */
-    public function setLockedAt($lockedAt)
+    public function setTestsPassed($testsPassed)
     {
-        $this->lockedAt = $lockedAt;
+        $this->testsPassed = $testsPassed;
         return $this;
     }
 
     /**
-     * Get lockedAt
+     * Get testsPassed
      *
-     * @return int $lockedAt
+     * @return hash $testsPassed
      */
-    public function getLockedAt()
+    public function getTestsPassed()
     {
-        return $this->lockedAt;
+        return $this->testsPassed;
+    }
+
+    /**
+     * Set unlockAt
+     *
+     * @param int $unlockAt
+     * @return $this
+     */
+    public function setUnlockAt($unlockAt)
+    {
+        $this->unlockAt = $unlockAt;
+        return $this;
+    }
+
+    /**
+     * Get unlockAt
+     *
+     * @return int $unlockAt
+     */
+    public function getUnlockAt()
+    {
+        return $this->unlockAt;
+    }
+    
+    /**
+    * @ORM\PrePersist
+    * @ORM\PreUpdate
+    */
+    public function prePersist()
+    {
+      $this->createdAt = date('Y-m-d H:i:s');
+    }
+
+    /**
+     * Set ticket
+     *
+     * @param string $ticket
+     * @return $this
+     */
+    public function setTicket($ticket)
+    {
+        $this->ticket = $ticket;
+        return $this;
+    }
+
+    /**
+     * Get ticket
+     *
+     * @return string $ticket
+     */
+    public function getTicket()
+    {
+        return $this->ticket;
+    }
+
+    /**
+     * Set allTestsPassedAt
+     *
+     * @param string $allTestsPassedAt
+     * @return $this
+     */
+    public function setAllTestsPassedAt($allTestsPassedAt)
+    {
+        $this->allTestsPassedAt = $allTestsPassedAt;
+        return $this;
+    }
+
+    /**
+     * Get allTestsPassedAt
+     *
+     * @return string $allTestsPassedAt
+     */
+    public function getAllTestsPassedAt()
+    {
+        return $this->allTestsPassedAt;
     }
 }
