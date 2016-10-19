@@ -70,11 +70,12 @@ class Rosh105Controller extends FOSRestController
         
         /* @var $up105 \AppBundle\Services\rosh\Up105Manager */
         $up105 = $this->get('up105.manager');
+        $rosh105 = $up105->getUserData($UEIgamer);
         $right_answer = $up105->parchmentAnswerChecker($answer);
         
         $rosh105 = null;
         if($right_answer){
-            $rosh105 = $up105->setUserTestsPassed($UEIgamer, Rosh::UPDATE_105_PARCHMENT);
+            $rosh105 = $up105->setUserTestsPassed($rosh105, Rosh::UPDATE_105_PARCHMENT);
         }
             
         return [
@@ -95,11 +96,12 @@ class Rosh105Controller extends FOSRestController
         
         /* @var $up105 \AppBundle\Services\rosh\Up105Manager */
         $up105 = $this->get('up105.manager');
+        $rosh105 = $up105->getUserData($UEIgamer);
         $right_answer = $up105->youCanNotPassAnswerChecker($answer);
                 
         $rosh105 = null;
         if($right_answer){
-            $rosh105 = $up105->setUserTestsPassed($UEIgamer, Rosh::UPDATE_105_NOT_PASS);
+            $rosh105 = $up105->setUserTestsPassed($rosh105, Rosh::UPDATE_105_NOT_PASS);
         }
         
         return [
@@ -120,11 +122,12 @@ class Rosh105Controller extends FOSRestController
         
         /* @var $up105 \AppBundle\Services\rosh\Up105Manager */
         $up105 = $this->get('up105.manager');
+        $rosh105 = $up105->getUserData($UEIgamer);
         $right_answer = $up105->theHiddenAnswerChecker($answer);
                 
         $rosh105 = null;
         if($right_answer){
-            $rosh105 = $up105->setUserTestsPassed($UEIgamer, Rosh::UPDATE_105_THE_HIDEN);
+            $rosh105 = $up105->setUserTestsPassed($rosh105, Rosh::UPDATE_105_THE_HIDEN);
         }
         
         return [
@@ -147,10 +150,9 @@ class Rosh105Controller extends FOSRestController
         $up105 = $this->get('up105.manager');        
         $rosh105 = $up105->getUserData($UEIgamer);
         $right_answer = $up105->ticketsAnswerChecker($rosh105, $answer);
-                
-        $rosh105 = null;
+
         if($right_answer){
-            $rosh105 = $up105->setUserTestsPassed($UEIgamer, Rosh::UPDATE_105_TICKETS);
+            $rosh105 = $up105->setUserTestsPassed($rosh105, Rosh::UPDATE_105_TICKETS);
         }
         
         return [
